@@ -1,5 +1,9 @@
 language: none
 build:
+  pre_ci_boot:
+    image_name: drydock/u16all
+    image_tag: v5.2.4
+    options: "-p 5432:5432"
   ci:
     # Configure postgres remote connections
     - echo "host    all             all             0.0.0.0/0              md5" | tee -a /etc/postgresql/9.6/main/pg_hba.conf
@@ -8,6 +12,9 @@ build:
     - shippable_service postgres start
     # Create postgres user for remote login
     - sudo su postgres -c "psql -c \"CREATE USER superuser WITH LOGIN SUPERUSER CREATEDB CREATEROLE PASSWORD 'superuser_password';\""
+
+    # Make sure the test script is executable
+    - chmod +x test.sh
     
     # Build and the test container
     - docker build --rm -t=ragesh/postgres_remote .
