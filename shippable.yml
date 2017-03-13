@@ -1,0 +1,14 @@
+language: none
+build:
+  ci:
+    # Configure postgres remote connections
+    - echo "host    all             all             0.0.0.0/0              md5" | tee -a /etc/postgresql/9.6/main/pg_hba.conf
+    - echo "listen_addresses = '*'" | tee -a /etc/postgresql/9.6/main/postgresql.conf
+    
+    - shippable_service postgres start
+    # Create postgres user for remote login
+    - sudo su postgres -c "psql -c \"CREATE USER superuser WITH LOGIN SUPERUSER CREATEDB CREATEROLE PASSWORD 'superuser_password';\""
+    
+    # Build and the test container
+    - docker build --rm -t=ragesh/postgres_remote .
+    - docker run --rm -t -e PGPASSWORD=superuser_password ragesh/postgres_remote /test.sh
