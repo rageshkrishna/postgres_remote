@@ -18,6 +18,6 @@ build:
     # Make sure the test script is executable
     - chmod +x test.sh
     
-    # Build and the test container
+    # Build and run the test container
     - docker build --rm -t=ragesh/postgres_remote .
     - docker run --rm -t -e PGPASSWORD=superuser_password ragesh/postgres_remote /test.sh
