@@ -12,6 +12,8 @@ build:
     - shippable_service postgres start
     # Create postgres user for remote login
     - sudo su postgres -c "psql -c \"CREATE USER superuser WITH LOGIN SUPERUSER CREATEDB CREATEROLE PASSWORD 'superuser_password';\""
+    
+    - sleep 30m
 
     # Make sure the test script is executable
     - chmod +x test.sh
