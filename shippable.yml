@@ -3,7 +3,7 @@ build:
   pre_ci_boot:
     image_name: drydock/u16all
     image_tag: v5.3.2
-    options: "-p 5432:5432"
+    options: "-p 5432:5432 --net=bridge"
   ci:
     # Configure postgres remote connections
     - echo "host    all             all             0.0.0.0/0              md5" | tee -a /etc/postgresql/9.6/main/pg_hba.conf
