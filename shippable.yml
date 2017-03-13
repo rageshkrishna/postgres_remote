@@ -8,12 +8,12 @@ build:
     # Configure postgres remote connections
     - echo "host    all             all             0.0.0.0/0              md5" | tee -a /etc/postgresql/9.6/main/pg_hba.conf
     - echo "listen_addresses = '*'" | tee -a /etc/postgresql/9.6/main/postgresql.conf
-    
+
+    # Manually start postgres
     - shippable_service postgres start
+    
     # Create postgres user for remote login
     - sudo su postgres -c "psql -c \"CREATE USER superuser WITH LOGIN SUPERUSER CREATEDB CREATEROLE PASSWORD 'superuser_password';\""
-    
-    - sleep 30m
 
     # Make sure the test script is executable
     - chmod +x test.sh
