@@ -1,3 +1,3 @@
-FROM drydock/u16all:v5.3.2
+FROM drydock/u16all:v5.7.3
 
 ADD ./test.sh /test.sh
