@@ -6,8 +6,8 @@ build:
     options: "-p 5432:5432 --net=bridge"
   ci:
     # Configure postgres remote connections
-    - echo "host    all             all             0.0.0.0/0              md5" | tee -a /etc/postgresql/10.0/main/pg_hba.conf
-    - echo "listen_addresses = '*'" | tee -a /etc/postgresql/10.0/main/postgresql.conf
+    - echo "host    all             all             0.0.0.0/0              md5" | tee -a /etc/postgresql/10/main/pg_hba.conf
+    - echo "listen_addresses = '*'" | tee -a /etc/postgresql/10/main/postgresql.conf
 
     # Manually start postgres
     - shippable_service postgres start
