@@ -2,7 +2,7 @@ language: none
 build:
   pre_ci_boot:
     image_name: drydock/u16pytall
-    image_tag: master
+    image_tag: latest
     options: "-p 5432:5432 --net=bridge"
   ci:
     # Configure postgres remote connections
